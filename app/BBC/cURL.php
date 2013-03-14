@@ -20,7 +20,8 @@ class cURL
 
         $options = array(
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_URL => $url
+            CURLOPT_URL => $url,
+            CURLOPT_FOLLOWLOCATION => true
         );
 
         if($this->on_reith) {
