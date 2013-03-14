@@ -182,7 +182,76 @@ $app->get('/', function() use ($app) {
  * Examining a single programme
  */
 $app->get('/{programme_pid}', function($programme_pid) use($app) {
-    return $programme_pid;
+
+    $programme = $app['db']->fetchAssoc(
+        'SELECT * FROM bbc_programmes WHERE pid = ? LIMIT 1'
+    , array($programme_pid));
+
+    // Fetch the episodes:
+    $episodes = $app['db']->fetchAll(
+        'SELECT * FROM bbc_episodes WHERE parent_pid = ?'
+    , array($programme['pid']));
+
+    // Calculate the responses:
+    $emosh_cols = array('angry', 'excited', 'happy', 'relaxing', 'sad');
+    foreach($episodes as &$episode)
+    {
+        $episode['max'] = 0;
+        $episode['sum'] = 0;
+        foreach($emosh_cols as $emosh)
+        {
+            if($episode[$emosh] > $episode['max'])
+            { $episode['max'] = $episode[$emosh]; }
+
+            $episode['sum'] += $episode[$emosh];
+        }
+    }
+
+    return $app['twig']->render('programme.twig', array(
+        'programme' => $programme,
+        'episodes' => $episodes,
+    ));
+});
+
+/**
+ * Examining a single episode
+ */
+$app->get('/{programme_pid}/{episode_pid}', function($programme_pid, $episode_pid) use($app) {
+
+    $programme = $app['db']->fetchAssoc(
+        'SELECT * FROM bbc_programmes WHERE pid = ? LIMIT 1'
+    , array($programme_pid));
+
+    // Fetch the episodes:
+    $episode = $app['db']->fetchAssoc(
+        'SELECT * FROM bbc_episodes WHERE pid = ?'
+    , array($episode_pid));
+
+    // Fetch the tracks:
+    $tracks = $app['db']->fetchAll(
+        'SELECT * FROM bbc_segments WHERE episode_pid = ?'
+    , array($episode['pid']));
+
+    // Calculate the responses:
+    $emosh_cols = array('angry', 'excited', 'happy', 'relaxing', 'sad');
+    foreach($tracks as &$track)
+    {
+        $track['max'] = 0;
+        $track['sum'] = 0;
+        foreach($emosh_cols as $emosh)
+        {
+            if($track[$emosh] > $track['max'])
+            { $track['max'] = $track[$emosh]; }
+
+            $track['sum'] += $track[$emosh];
+        }
+    }
+
+    return $app['twig']->render('episode.twig', array(
+        'programme' => $programme,
+        'episode' => $episode,
+        'tracks' => $tracks
+    ));
 });
 
 $app->run();

@@ -1,0 +1,67 @@
+{% extends 'page.twig' %}
+
+{% block content %}
+
+    <div class="page-header">
+        <h1>{{ programme.title }} <small>{{ programme.service_name }}</small></h1>
+    </div>
+
+    <p><a href="/">&laquo; Back to all programmes</a></p>
+
+    {% for episode in episodes %}
+        <div class="row-fluid">
+            <div class="span3">
+                <h2><a href="/{{ programme.pid }}/{{ episode.pid }}">{{ episode.date|date('j F Y') }}</a></h2>
+                <p>{{ episode.synopsis }}</p>
+            </div>
+            <div class="span9">
+                <h3>Emotions</h3>
+
+                <div class="progress">
+                    <div class="bar bar-danger" style="width: {{ (episode.angry / episode.sum) * 100 }}%"></div>
+                    <div class="bar bar-warning" style="width: {{ (episode.excited / episode.sum) * 100 }}%"></div>
+                    <div class="bar bar-success" style="width: {{ (episode.happy / episode.sum) * 100 }}%"></div>
+                    <div class="bar bar-info" style="width: {{ (episode.relaxing / episode.sum) * 100 }}%"></div>
+                    <div class="bar" style="width: {{ (episode.sad / episode.sum) * 100 }}%"></div>
+                </div>
+
+                <table class="table table-striped table-compact">
+                    <tbody>
+                        <tr>
+                            <th style="width: 100px">Angry</th>
+                            <td>
+                                <small>{{ episode.angry }}</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Excited</th>
+                            <td>
+                                <small>{{ episode.excited }}</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Happy</th>
+                            <td>
+                                <small>{{ episode.happy }}</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Relaxing</th>
+                            <td>
+                                <small>{{ episode.relaxing }}</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Sad</th>
+                            <td>
+                                <small>{{ episode.sad }}</small>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
+

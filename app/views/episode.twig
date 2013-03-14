@@ -1,0 +1,73 @@
+{% extends 'page.twig' %}
+
+{% block content %}
+
+    <div class="page-header">
+        <h1>{{ episode.date|date('j F Y') }} <small>{{ programme.title }}</small></h1>
+    </div>
+
+    <p><a href="/{{ programme.pid }}">&laquo; Back to all episodes</a></p>
+
+    <div class="alert alert-block">
+        <h4>Warning!</h4>
+        <p>The emotions are calculated by Artist, not by track. So two tracks by the same artist will
+            have the same emotional response.</p>
+    </div>
+
+    {% for track in tracks %}
+        <div class="row-fluid">
+            <div class="span3">
+                <h2>{{ track.artist }}</h2>
+                <p>{{ track.track }}</p>
+            </div>
+            <div class="span9">
+                <h3>Emotions</h3>
+
+                <div class="progress">
+                    <div class="bar bar-danger" style="width: {{ (track.angry / track.sum) * 100 }}%"></div>
+                    <div class="bar bar-warning" style="width: {{ (track.excited / track.sum) * 100 }}%"></div>
+                    <div class="bar bar-success" style="width: {{ (track.happy / track.sum) * 100 }}%"></div>
+                    <div class="bar bar-info" style="width: {{ (track.relaxing / track.sum) * 100 }}%"></div>
+                    <div class="bar" style="width: {{ (track.sad / track.sum) * 100 }}%"></div>
+                </div>
+
+                <table class="table table-striped table-compact">
+                    <tbody>
+                        <tr>
+                            <th style="width: 100px">Angry</th>
+                            <td>
+                                <small>{{ track.angry }}</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Excited</th>
+                            <td>
+                                <small>{{ track.excited }}</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Happy</th>
+                            <td>
+                                <small>{{ track.happy }}</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Relaxing</th>
+                            <td>
+                                <small>{{ track.relaxing }}</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Sad</th>
+                            <td>
+                                <small>{{ track.sad }}</small>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
+
