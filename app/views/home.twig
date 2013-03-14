@@ -1,0 +1,72 @@
+{% extends 'page.twig' %}
+
+{% block content %}
+
+    <div class="page-header">
+        <h1>All Programmes</h1>
+    </div>
+
+    {% for programme in programmes %}
+        <div class="row-fluid">
+            <div class="span3">
+                <h2><a href="/{{ programme.pid }}">{{ programme.title }}</a></h2>
+                <p>{{ programme.service_name }}</p>
+                <p><small>PID: {{ programme.pid }}</small></p>
+            </div>
+            <div class="span9">
+                <h3>Total Emotional Response</h3>
+                <table class="table table-striped table-compact">
+                    <tbody>
+                        <tr>
+                            <th style="width: 100px">Angry</th>
+                            <td>
+                                <div class="progress progress-danger">
+                                    <div class="bar" style="width: {{ (programme.angry / programme.max) * 100 }}%"></div>
+                                </div>
+                                <small>{{ programme.angry }}</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Excited</th>
+                            <td>
+                                <div class="progress progress-warning">
+                                    <div class="bar" style="width: {{ (programme.excited / programme.max) * 100 }}%"></div>
+                                </div>
+                                <small>{{ programme.excited }}</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Happy</th>
+                            <td>
+                                <div class="progress progress-success">
+                                    <div class="bar" style="width: {{ (programme.happy / programme.max) * 100 }}%"></div>
+                                </div>
+                                <small>{{ programme.happy }}</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Relaxing</th>
+                            <td>
+                                <div class="progress progress-info">
+                                    <div class="bar" style="width: {{ (programme.relaxing / programme.max) * 100 }}%"></div>
+                                </div>
+                                <small>{{ programme.relaxing }}</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Sad</th>
+                            <td>
+                                <div class="progress">
+                                    <div class="bar" style="width: {{ (programme.sad / programme.max) * 100 }}%"></div>
+                                </div>
+                                <small>{{ programme.sad }}</small>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
+

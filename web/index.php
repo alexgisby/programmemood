@@ -22,6 +22,10 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     ),
 ));
 
+$app->register(new Silex\Provider\TwigServiceProvider(), array(
+    'twig.path' => BASEDIR.'/app/views',
+));
+
 BBC\TinyORM::$app = &$app;
 
 /**
@@ -30,7 +34,7 @@ BBC\TinyORM::$app = &$app;
 $app->get('/analyse', function() use ($app) {
     
     $show_pids = array(
-        'b0072lb2', 'b01mrh21', 'b006wkb6', 'b006wkt4', 
+        'b0072lb2', 'b01mrh21', 'b006wr3p', 'b00p2dfq',
         'b0080x5m', 'b006wkth', 'b00c000j', 'b0100rp6'
     );
 
@@ -144,8 +148,41 @@ $app->get('/analyse', function() use ($app) {
 
 });
 
-$app->get('/', function(){
-    return 'Hello World';
+/**
+ * Homepage of the app
+ */
+$app->get('/', function() use ($app) {
+
+    // Fetch all of the programmes;
+    $programmes = $app['db']->fetchAll(
+        'SELECT * FROM bbc_programmes ORDER BY service_key ASC, title ASC'
+    );
+
+    // Calculate the responses:
+    $emosh_cols = array('angry', 'excited', 'happy', 'relaxing', 'sad');
+    foreach($programmes as &$programme)
+    {
+        $programme['max'] = 0;
+        $programme['sum'] = 0;
+        foreach($emosh_cols as $emosh)
+        {
+            if($programme[$emosh] > $programme['max'])
+            { $programme['max'] = $programme[$emosh]; }
+
+            $programme['sum'] += $programme[$emosh];
+        }
+    }
+
+    return $app['twig']->render('home.twig', array(
+        'programmes' => $programmes
+    ));
+});
+
+/**
+ * Examining a single programme
+ */
+$app->get('/{programme_pid}', function($programme_pid) use($app) {
+    return $programme_pid;
 });
 
 $app->run();
