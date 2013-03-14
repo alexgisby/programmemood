@@ -55,7 +55,21 @@ $app->get('/analyse', function() use ($app) {
 
         // Fetch the episodes for this show in January this year:
         $episodes_url = 'http://www.bbc.co.uk/programmes/' . $programme->pid . '/episodes/2013/01.json';
-        var_dump($episodes_url);
+        $edata = $curl->request($episodes_url);
+        foreach($edata->broadcasts as $i => $broadcast) 
+        {
+            $ep = new BBC\TinyORM('bbc_episodes', array(
+                'pid' => $broadcast->programme->pid,
+                'parent_pid' => $programme->pid,
+                'date' => date('Y-m-d H:i:s', strtotime($broadcast->start)),
+                'synopsis' => $broadcast->programme->short_synopsis,
+            ));
+            
+            // $ep->save();
+
+            // Go and find tracks for this episode:
+            
+        }
 
     }
 
