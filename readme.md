@@ -24,6 +24,7 @@ I haven't included the full mood lookup database as it's about 24MB and nuked ph
 it for inclusion in the repo. Therefore:
 
 * Download and run [the SQL file at the bottom of this page](http://blog.portwd.com/music-research/calculating-artists-moods-using-echonest-api/)
+* Add indexes to all the echonest_artist_id columns in the mood tables, and to the artist_name column in artists, otherwise it runs slow as hell.
 * Run the extra_schema.sql file in this repo.
 
 In your browser, go to http://localhost:8888/analyse and wait for it to complete. This populates the database
