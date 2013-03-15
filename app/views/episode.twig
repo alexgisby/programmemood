@@ -24,11 +24,11 @@
                 <h3>Emotions</h3>
 
                 <div class="progress">
-                    <div class="bar bar-danger" style="width: {{ (track.angry / track.sum) * 100 }}%"></div>
-                    <div class="bar bar-warning" style="width: {{ (track.excited / track.sum) * 100 }}%"></div>
-                    <div class="bar bar-success" style="width: {{ (track.happy / track.sum) * 100 }}%"></div>
-                    <div class="bar bar-info" style="width: {{ (track.relaxing / track.sum) * 100 }}%"></div>
-                    <div class="bar" style="width: {{ (track.sad / track.sum) * 100 }}%"></div>
+                    <div class="bar bar-danger" title="Angry" style="width: {{ (track.angry / track.sum) * 100 }}%"></div>
+                    <div class="bar bar-warning" title="Excited" style="width: {{ (track.excited / track.sum) * 100 }}%"></div>
+                    <div class="bar bar-success" title="Happy" style="width: {{ (track.happy / track.sum) * 100 }}%"></div>
+                    <div class="bar bar-info" title="Relaxing" style="width: {{ (track.relaxing / track.sum) * 100 }}%"></div>
+                    <div class="bar" title="Sad" style="width: {{ (track.sad / track.sum) * 100 }}%"></div>
                 </div>
 
                 <table class="table table-striped table-compact">

@@ -3,15 +3,15 @@
 {% block content %}
 
     <div class="page-header">
-        <h1>All Programmes</h1>
+        <h1>Programme Mood &nbsp; &nbsp;<small>Jan 2013</small></h1>
     </div>
 
     <div style="overflow: hidden;">
     {% for programme in programmes %}
-        <div style="float: left; margin: 2%; width: 45%; height: 540px;">
+        <div style="float: left; margin: 0 2% 10px 2%; width: 45%; border-bottom: 1px solid #ccc;">
             <div class="row-fluid">
                 <div class="span12">
-                    <h3><a href="/{{ programme.pid }}">{{ programme.title }}</a></h3>
+                    <h2 style="font-size: 18px; max-height: 36px; overflow: hidden; margin-bottom: 0;"><a href="/{{ programme.pid }}">{{ programme.title }}</a></h2>
                     <p>{{ programme.service_name }}</p>
                 </div>
                 <div class="span12">
@@ -19,48 +19,43 @@
                     <table class="table table-striped table-compact">
                         <tbody>
                             <tr>
-                                <th style="width: 100px">Angry</th>
+                                <th style="width: 100px">Angry <br /><small class="muted">{{ programme.angry }}</small></th>
                                 <td>
                                     <div class="progress progress-danger">
-                                        <div class="bar" style="width: {{ (programme.angry / programme.max) * 100 }}%"></div>
+                                        <div class="bar" title="Angry" style="width: {{ (programme.angry / programme.max) * 100 }}%"></div>
                                     </div>
-                                    <small>{{ programme.angry }}</small>
                                 </td>
                             </tr>
                             <tr>
-                                <th>Excited</th>
+                                <th>Excited <br /><small class="muted">{{ programme.excited }}</small></th>
                                 <td>
                                     <div class="progress progress-warning">
-                                        <div class="bar" style="width: {{ (programme.excited / programme.max) * 100 }}%"></div>
+                                        <div class="bar" title="Excited" style="width: {{ (programme.excited / programme.max) * 100 }}%"></div>
                                     </div>
-                                    <small>{{ programme.excited }}</small>
                                 </td>
                             </tr>
                             <tr>
-                                <th>Happy</th>
+                                <th>Happy <br /><small class="muted">{{ programme.happy }}</small></th>
                                 <td>
                                     <div class="progress progress-success">
-                                        <div class="bar" style="width: {{ (programme.happy / programme.max) * 100 }}%"></div>
+                                        <div class="bar" title="Happy" style="width: {{ (programme.happy / programme.max) * 100 }}%"></div>
                                     </div>
-                                    <small>{{ programme.happy }}</small>
                                 </td>
                             </tr>
                             <tr>
-                                <th>Relaxing</th>
+                                <th>Relaxing <br /><small class="muted">{{ programme.relaxing }}</small></th>
                                 <td>
                                     <div class="progress progress-info">
-                                        <div class="bar" style="width: {{ (programme.relaxing / programme.max) * 100 }}%"></div>
+                                        <div class="bar" title="Relaxing" style="width: {{ (programme.relaxing / programme.max) * 100 }}%"></div>
                                     </div>
-                                    <small>{{ programme.relaxing }}</small>
                                 </td>
                             </tr>
                             <tr>
-                                <th>Sad</th>
+                                <th>Sad <br /><small class="muted">{{ programme.sad }}</small></th>
                                 <td>
                                     <div class="progress">
-                                        <div class="bar" style="width: {{ (programme.sad / programme.max) * 100 }}%"></div>
+                                        <div class="bar" title="Sad" style="width: {{ (programme.sad / programme.max) * 100 }}%"></div>
                                     </div>
-                                    <small>{{ programme.sad }}</small>
                                 </td>
                             </tr>
                         </tbody>

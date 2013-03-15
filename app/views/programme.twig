@@ -15,14 +15,14 @@
                 <p>{{ episode.synopsis }}</p>
             </div>
             <div class="span9">
-                <h3>Emotions</h3>
+                <h3>Musical Emotions</h3>
 
                 <div class="progress">
-                    <div class="bar bar-danger" style="width: {{ (episode.angry / episode.sum) * 100 }}%"></div>
-                    <div class="bar bar-warning" style="width: {{ (episode.excited / episode.sum) * 100 }}%"></div>
-                    <div class="bar bar-success" style="width: {{ (episode.happy / episode.sum) * 100 }}%"></div>
-                    <div class="bar bar-info" style="width: {{ (episode.relaxing / episode.sum) * 100 }}%"></div>
-                    <div class="bar" style="width: {{ (episode.sad / episode.sum) * 100 }}%"></div>
+                    <div class="bar bar-danger" title="Angry" style="width: {{ (episode.angry / episode.sum) * 100 }}%"></div>
+                    <div class="bar bar-warning" title="Excited" style="width: {{ (episode.excited / episode.sum) * 100 }}%"></div>
+                    <div class="bar bar-success" title="Happy" style="width: {{ (episode.happy / episode.sum) * 100 }}%"></div>
+                    <div class="bar bar-info" title="Relaxing" style="width: {{ (episode.relaxing / episode.sum) * 100 }}%"></div>
+                    <div class="bar" title="Sad" style="width: {{ (episode.sad / episode.sum) * 100 }}%"></div>
                 </div>
 
                 <table class="table table-striped table-compact">
