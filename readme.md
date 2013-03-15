@@ -1,4 +1,4 @@
-# Moodometer
+# Programme Mood
 
 A BBC 10% time project around calculating the mood of a show based on the music that they play.
 
